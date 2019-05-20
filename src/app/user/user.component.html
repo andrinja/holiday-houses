@@ -1,0 +1,9 @@
+<h1>Hello, {{user.name}}</h1>
+<div>Update profile</div>
+
+<div *ngIf='user.provider == "password"'>
+    <form [formGroup]="profileForm">
+      <input formControlName="name">
+      <button (click)="save(profileForm.value)">Update</button>
+    </form>
+</div>

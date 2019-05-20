@@ -1,0 +1,17 @@
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title>{{ property.name }}</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+            <img *ngIf="property.imagePath; else defaultImage" mat-card-image src="{{ property.imagePath }}" alt="">
+            <ng-template #defaultImage>
+                 <img mat-card-image src="https://i.stack.imgur.com/l60Hf.png" alt="">
+            </ng-template>
+            <p>{{ property.description}}</p>
+            <p>{{ property.address }}</p>
+            <p> {{ property.country }} </p>
+    </mat-card-content>
+    <button mat-button routerLink="/dashboard/property/{{property._id}}/edit">Edit</button>
+    <button mat-button (click)="onPropertyDelete(property)">Delete</button>
+</mat-card>

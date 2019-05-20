@@ -1,0 +1,45 @@
+
+<form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+        <!-- name -->
+        <mat-form-field>
+          <input 
+            matInput 
+            placeholder="Name" 
+            formControlName="name"
+          >
+          <mat-error 
+            *ngIf="!propertyForm.get('name').valid && propertyForm.get('name').touched" >
+            Enter property name
+          </mat-error>
+        </mat-form-field>
+      
+        <!-- description -->
+        <mat-form-field>
+          <textarea 
+            matInput 
+            placeholder="Description" 
+            formControlName="description">
+          </textarea>
+          <mat-error 
+            *ngIf="!propertyForm.get('description').valid && propertyForm.get('description').touched" >
+            Enter property description
+          </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field>
+            <input 
+                matInput 
+                placeholder="Address" 
+                formControlName="address"
+            >
+            <mat-error 
+                *ngIf="!propertyForm.get('address').valid && propertyForm.get('address').touched" >
+                Enter property address
+            </mat-error>
+        </mat-form-field>
+        <mat-radio-group formControlName="location" aria-label="Select product country">
+            <mat-radio-button *ngFor="let location of locations" [value]="location">{{ location }}</mat-radio-button>
+        </mat-radio-group>
+      
+        <button mat-raised-button color="primary" id="btnCreateProperty" [disabled]="!propertyForm.valid">Create property</button>
+      </form>
