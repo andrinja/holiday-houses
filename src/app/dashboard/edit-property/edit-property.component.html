@@ -1,0 +1,38 @@
+<mat-icon routerLink="/dashboard/properties/">arrow_back</mat-icon>
+<div *ngIf="isLoading">Please give a moment to load your property!</div>
+<div class="title">Edit your property</div>
+<form [formGroup]="editPropertyForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <input 
+            matInput 
+            placeholder="Name"
+            formControlName="name"
+          >
+    </mat-form-field>
+    <mat-form-field>
+        <input 
+            matInput 
+            placeholder="Description"
+            formControlName="description"
+          >
+    </mat-form-field>
+    <mat-form-field>
+        <input 
+            matInput 
+            placeholder="Address"
+            formControlName="address"
+          >
+    </mat-form-field>
+    <mat-radio-group formControlName="location" aria-label="Select product country">
+            <mat-radio-button *ngFor="let location of locations" [value]="location">{{ location }}</mat-radio-button>
+    </mat-radio-group>
+
+    <img *ngIf="property.imagePath" mat-card-image src="{{ property.imagePath }}">
+    <input type="file" (change)="onFileSelected($event)" access=".png,.jpg,.jpeg">
+    
+    <button *ngIf="selectedFile" type="button" mat-button color="danger" (click)="onClearSelectedFile()">Clear</button> 
+
+    <button *ngIf="property.imagePath" type="button" mat-button color="danger" (click)="onDeleteImage()">Delete</button>       
+
+    <button mat-raised-button color="primary" id="btnEditProperty" type="submit">Edit property</button>
+</form>

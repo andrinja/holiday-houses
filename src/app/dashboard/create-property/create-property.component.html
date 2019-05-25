@@ -1,4 +1,4 @@
-
+<mat-icon routerLink="/dashboard/properties/">arrow_back</mat-icon>
 <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
         <!-- name -->
         <mat-form-field>
@@ -37,7 +37,12 @@
                 Enter property address
             </mat-error>
         </mat-form-field>
-        <mat-radio-group formControlName="location" aria-label="Select product country">
+
+          <h1>Image upload</h1>
+          <!-- Cannot use it ad form control. To fetch need to add change listener -->
+          <input type="file" (change)="onFileSelected($event)" access=".png,.jpg,.jpeg">
+        
+        <mat-radio-group formControlName="location" aria-label="Select property country">
             <mat-radio-button *ngFor="let location of locations" [value]="location">{{ location }}</mat-radio-button>
         </mat-radio-group>
       

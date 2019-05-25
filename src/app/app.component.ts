@@ -15,6 +15,7 @@ export class AppComponent {
   constructor( public authService: AuthService,
                public userService: UserService,
                public router: Router) {
+
    
   }
 

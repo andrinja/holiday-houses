@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
       this.successMessage = "Your account has been created";
 
       //redirect me to the login page
-      this.router.navigateByUrl('home/login');
+      this.router.navigateByUrl('login');
       
     }, err => {
       console.log(err);

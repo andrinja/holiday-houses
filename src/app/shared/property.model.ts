@@ -6,21 +6,21 @@ export class Property {
     public description: string;
     public imagePath: string;
     public address: string;
-    public country: string;
+    public location: string;
     public amenities: Amenity[]
 
     constructor(name: string, 
                 desc: string, 
                 imagePath: string, 
                 address: string, 
-                country: string, 
+                location: string, 
                 amenities: Amenity[]) 
     {
         this.name = name;
         this.description = desc;
         this.imagePath = imagePath;
         this. address = address;
-        this.country = country;
+        this.location = location;
         this.amenities = amenities;
     }
 }

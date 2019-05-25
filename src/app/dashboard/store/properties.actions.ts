@@ -5,6 +5,7 @@ import { AppState } from './store';
 import { DataStorageService } from '../../services/data-storage.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 
 @Injectable({ providedIn: 'root'})
@@ -13,7 +14,8 @@ export class PropertyActions {
   constructor(
             private ngRedux: NgRedux<AppState>,
             private api: DataStorageService,
-            private router: Router) {}
+            private router: Router,
+            private afStorage: AngularFireStorage) {}
 
     static GET_PROPERTIES_SUCCESS: string = 'GET_PROPERTIES_SUCCESS';
     static GET_PROPERTIES_FAILURE: string = 'GET_PROPERTIES_FAILURE';
@@ -30,13 +32,30 @@ export class PropertyActions {
 
         let properties = []; 
 
+   
         const responseValue = response.val();
         if (responseValue != undefined && responseValue != null) {
-          for (const [key, property] of Object.entries(responseValue)) {
-            properties.push({
-              _id: key,
-              ...property
-            })
+          for (let [key, property] of Object.entries(responseValue)) {
+
+            const imagePath = property['imagePath'];
+
+            if (imagePath) {
+              const ref = this.afStorage.ref(imagePath);
+              ref.getDownloadURL().toPromise().then( url => {
+                property['imagePath'] = url;
+
+                properties.push({
+                  _id: key,
+                  ...property
+                })
+
+              })
+            } else {
+              properties.push({
+                _id: key,
+                ...property
+              })
+            }
           }
         }
 
@@ -57,8 +76,7 @@ export class PropertyActions {
         })
 
         this.router.navigate(['/dashboard/properties']);
-      })
-      
+      })      
     }
 
     deleteProperty(property: Property) :void {
@@ -70,5 +88,19 @@ export class PropertyActions {
         })
       })
 
+    }
+
+    updateProperty(property: Property, id: string) : void {
+      this.api.updateProperty(property, id);
+
+      this.ngRedux.dispatch({
+        type: PropertyActions.UPDATE_PROPERTY,
+        payload: {
+          _id: id,
+          ...property
+        }
+      })
+      
+      this.router.navigate(['/dashboard/properties']);
     }
 }

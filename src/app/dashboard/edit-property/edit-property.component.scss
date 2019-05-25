@@ -1,0 +1,15 @@
+.title {
+    text-align: center;
+}
+form {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+    mat-form-field {
+        width: 100%;
+    }
+}

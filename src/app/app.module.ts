@@ -35,6 +35,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 // Services
 import { AuthService } from './services/auth.service';
@@ -83,7 +84,8 @@ export const firebaseConfig = environment.firebaseConfig;
     HttpModule,
     NgReduxModule, NgReduxRouterModule.forRoot(),
     HttpClientModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   // to be able to inject service into another service
   providers: [AuthService, UserService, PropertyService, DataStorageService, AuthGuard, UserResolver],

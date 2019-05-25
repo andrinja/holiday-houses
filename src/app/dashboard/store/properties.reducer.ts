@@ -32,10 +32,13 @@ export function propertyReducer(state: PropertyState = INITIAL_STATE, action: an
         let newPropertiesAfterUpdate = state.properties.map(property => {
             if (property._id === action.payload._id) {
                 return action.payload
+            } else {
+                return property;
             }
-            return property;
         })
+
         return tassign(state, {properties: newPropertiesAfterUpdate});
+        
         default:
             return state;
     }

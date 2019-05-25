@@ -1,5 +1,6 @@
 
 <button mat-button routerLink="/dashboard/property/create" id="btn-new-property">+ Add property</button>
+<button mat-button routerLink="/user" id="btn-edit-user">Edit profile</button>
 <div *ngIf="isLoading">Please give a moment to load all properties</div>
 <div *ngFor="let propertyRef of properties">
     <app-property [property]="propertyRef" (nameOfTheEventOr)="onPropertyClick($event)"></app-property>

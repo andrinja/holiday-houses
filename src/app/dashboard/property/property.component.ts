@@ -19,5 +19,5 @@ export class PropertyComponent implements OnInit {
   onPropertyDelete(property: Property) {
     this.propertyActions.deleteProperty(property);
   }
-
+    
 }
